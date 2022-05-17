@@ -114,3 +114,21 @@ Tests can be run from the root of the repository or from each individual test pr
 ```shell
 dotnet test
 ```
+
+## Assignment
+Context:
+The current rendering implementation reads and interprets the properties of a feature and makes a decision on how to render based on them.
+
+Problem:
+This decision-making is done at rendering time and is implemented using string comparisons, this can lead to delays in rendering, an already costly operation, based on the number of properties and based on how far the decision-tree the code has to go.
+All of the properties of a feature are stored in the memory mapped file as strings, which leads to increased serialization and interpretation complexity.
+These two things add, potentially unneeded, overall, code complexity as well as overhead for each request for in the backend service.
+
+Assignment:
+Implement a more efficient way of storing the properties needed to render the different types of landscapes, roads, rivers, etc.; ideally forgoing the need to use strings.
+
+Submission instructions:
+The preferred way would be to fork the repository on GitHub, specifically branch 'lab9' and submit a link to your fork as the assignment content.
+Alternatively, after making your modifications, submit the entire folder as an archive (.zip, .rar, .7z, etc.).
+
+In both cases please make sure not to leave out any files/folders, the project must build, and we must be able to run it end-to-end in order to grade you.
