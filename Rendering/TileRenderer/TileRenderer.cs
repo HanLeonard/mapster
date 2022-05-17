@@ -12,9 +12,10 @@ public static class TileRenderer {
         BaseShape? baseShape = null;
 
         var featureType = feature.Type;
+        // OWN-CODE
         // We replaced the string comparisons of properties with int comparisons and multiple iterations through all properties with only one*
         // (still multiple if you count the border/ populatedPlace method, which were not refactored to maintain readability and portability)
-        
+
         if (Border.ShouldBeBorder(feature)) {
             var coordinates = feature.Coordinates;
             var border = new Border(coordinates);

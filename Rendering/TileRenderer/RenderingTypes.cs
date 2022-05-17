@@ -108,6 +108,7 @@ public struct GeoFeature : BaseShape
     public GeoFeature(ReadOnlySpan<Coordinate> c, MapFeatureData feature)
     {
         IsPolygon = feature.Type == GeometryType.Polygon;
+        // OWN-CODE
         var naturalKey = feature.Properties.FirstOrDefault(x => x.Key == MapFeatureData.CustomPropertyEnum.Natural).Value;
         Type = GeoFeatureType.Unknown;
         if (naturalKey != null)
@@ -202,6 +203,7 @@ public struct PopulatedPlace : BaseShape
         for (var i = 0; i < c.Length; i++)
             ScreenCoordinates[i] = new PointF((float)MercatorProjection.lonToX(c[i].Longitude),
                 (float)MercatorProjection.latToY(c[i].Latitude));
+        // OWN-CODE
         var name = feature.Properties.FirstOrDefault(x => x.Key == MapFeatureData.CustomPropertyEnum.Name).Value;
 
         if (feature.Label.IsEmpty)
@@ -224,6 +226,7 @@ public struct PopulatedPlace : BaseShape
             return false;
         }
         foreach (var entry in feature.Properties)
+            // OWN-CODE
             if (entry.Key==MapFeatureData.CustomPropertyEnum.Place)
             {
                 if (entry.Value.StartsWith("city") || entry.Value.StartsWith("town") ||
@@ -264,10 +267,12 @@ public struct Border : BaseShape
         var foundLevel = false;
         foreach (var entry in feature.Properties)
         {
+            // OWN-CODE
             if (entry.Key==MapFeatureData.CustomPropertyEnum.Boundary && entry.Value.StartsWith("administrative"))
             {
                 foundBoundary = true;
             }
+            // OWN-CODE
             if (entry.Key==MapFeatureData.CustomPropertyEnum.Admin_level && entry.Value == "2")
             {
                 foundLevel = true;
