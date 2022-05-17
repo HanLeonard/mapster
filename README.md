@@ -1,3 +1,13 @@
+Fork by Han Leonard Gr1 Sg2
+-----------------------
+The changes made are visible in the last two commits, in the files DataFile.cs , RenderingTypes.cs  aand TileRenderer.cs
+My take in optimizing the code is to replace the comparison of strings in the Tessellate function with comparison of ints (specifically enum with default int values), as it it a lot faster than string comparison, which has to convert the characters and to take into account culture, encoding etc.
+Also, the structure of Tesselate is changed to not use Linq for iterating the properties, since it introduces overhead and is slower than foreach.
+In addition, we iterate the properties only once , instead of once for each if.
+
+In DataFile.cs only the properties used in Tesselation are stored in memory from the file, to parse redundant data.
+
+
 Mapster
 -----------------------
 The solution in this repository contains several projects that aim to read and extract information from the OpenStreeMap binary [`osm.pbf`](https://wiki.openstreetmap.org/wiki/PBF_Format) format, as well as interpret and present this data in a user-facing way.
